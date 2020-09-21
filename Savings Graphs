@@ -1,0 +1,86 @@
+import matplotlib.pyplot as plt
+
+solar_total = float(input('What is the total cost of the solar system? '))
+solar_total *= -0.74
+solar_total4 = solar_total
+solar_total55 = solar_total
+solar_total4_list = []
+solar_total55_list = []
+solar_monthly = float(input("What is the solar monthly cost? "))
+solar_yearly = solar_monthly * 12
+utility_monthly = float(input("What is the current monthly cost of electricity? "))
+print('\n')
+# offset = float(input('How much of the bill will be offset (as a decimal)? '))
+utility_yearly = utility_monthly * 12
+growth_rate4 = 1.04
+growth_rate55 = 1.055
+num_years = 25
+utility_yearly_list4 = []
+running_yearly4 = utility_yearly
+running_yearly55 = utility_yearly
+utility_yearly_list55 = []
+solar_yearly_list = [solar_yearly]*20
+for num in range(0,5):
+    solar_yearly_list.append(0)
+year_list = []
+net_savings4_list = []
+net_savings55_list = []
+net_savings4 = 0
+net_savings55 = 0
+
+for num in range(1,num_years+1):
+    year_list.append(num)
+
+for year in range(len(year_list)):
+    running_yearly4 = running_yearly4
+    utility_yearly_list4.append(running_yearly4)
+    net_savings4 += (running_yearly4 - solar_yearly_list[year])
+    net_savings4 = net_savings4
+    net_savings4_list.append(net_savings4)
+    solar_total4 += running_yearly4
+    solar_total4_list.append(solar_total4)
+    running_yearly4 *= growth_rate4
+
+    running_yearly55 = running_yearly55
+    utility_yearly_list55.append(running_yearly55)
+    net_savings55 += (running_yearly55 - solar_yearly_list[year])
+    net_savings55 = net_savings55
+    net_savings55_list.append(net_savings55)
+    solar_total55 += running_yearly55
+    solar_total55_list.append(solar_total55)
+    running_yearly55 *= growth_rate55
+    
+
+for num in range(len(year_list)):
+    print('Year',str(year_list[num])+':\nSolar Cost:',solar_yearly_list[num],'\nElectricity Cost @ 4%:',round(utility_yearly_list4[num],2),'\nElectricity Cost @ 5.5%:',round(utility_yearly_list55[num],2),'\nSavings @ 4%:',round(net_savings4_list[num],2),'\nSavings @ 5.5%:',round(net_savings55_list[num],2),'\nCash Savings @ 4%:',round(solar_total4_list[num],2),'\nCash Savings @ 5.5%:',round(solar_total55_list[num],2),'\n')
+    
+plt.plot(year_list,utility_yearly_list4, label = "Utility @ 4% growth")
+plt.plot(year_list,utility_yearly_list55, label = 'Utility @ 5.5% growth')
+plt.plot(year_list,solar_yearly_list, label = 'Solar')
+plt.title('Utility vs. Solar Yearly Costs Over 25 Years')
+plt.xlabel('Years')
+plt.ylabel('$$$')
+plt.grid(True)
+plt.legend()
+plt.show()
+plt.clf()
+
+plt.plot(year_list,net_savings4_list, label = 'Savings @ 4% growth')
+plt.plot(year_list,net_savings55_list, label = 'Savings @ 5.5% growth')
+plt.title('Savings With Solar Over 25 Years')
+plt.xlabel('Years')
+plt.ylabel('$$$')
+plt.grid(True)
+plt.legend()
+plt.show()
+plt.clf()
+
+plt.plot(year_list,solar_total4_list, label = 'Solar Payoff @ 4% growth')
+plt.plot(year_list,solar_total55_list, label = 'Solar Payoff @ 5.5% growth')
+plt.title('Solar Cash Payoff Period')
+plt.xlabel('Years')
+plt.ylabel('$$$')
+plt.grid(True)
+plt.legend()
+plt.show()
+plt.clf()
